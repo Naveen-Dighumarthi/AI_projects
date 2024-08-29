@@ -54,26 +54,6 @@ model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
                               generation_config=generation_config,
                               safety_settings=safety_settings)
 
-convo = model.start_chat(history=[
-
-])
-
-bot = telebot.TeleBot(TelegramBOT_TOKEN)
-
-@bot.message_handler(commands=['start', 'help'])
-def send_welcome(message):
-    bot.reply_to(message, "Welcome! to Mini Gemini BOT,The MOST POWERFUL 💪🏻 AI BOT right now..")
-
-@bot.message_handler(func=lambda message: True)
-def handle_message(message):
- try :
-  print(message)
-  convo.send_message(message.text)
-  bot.reply_to(message, convo.last.text)
- except Exception as e:
-        print(f"An error occurred: {e}")
-        bot.reply_to(message, "Sorry, I couldn't process your request.")
-bot.polling()
 
 import telebot
 import os
